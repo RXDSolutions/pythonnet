@@ -8,7 +8,7 @@ namespace Python.Runtime
     /// code. It defines the common fields that associate CLR and Python
     /// objects and common utilities to convert between those identities.
     /// </summary>
-    internal abstract class ManagedType
+    public abstract class ManagedType
     {
         internal GCHandle gcHandle; // Native handle
         internal IntPtr pyHandle; // PyObject *

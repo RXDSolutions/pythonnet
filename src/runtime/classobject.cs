@@ -9,7 +9,7 @@ namespace Python.Runtime
     /// Python type objects. Each of those type objects is associated with
     /// an instance of ClassObject, which provides its implementation.
     /// </summary>
-    internal class ClassObject : ClassBase
+    public class ClassObject : ClassBase
     {
         internal ConstructorBinder binder;
         internal ConstructorInfo[] ctors;

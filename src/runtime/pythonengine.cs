@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Python.Runtime
 {
+
     /// <summary>
     /// This class provides the public interface of the Python runtime.
     /// </summary>
@@ -17,6 +18,32 @@ namespace Python.Runtime
         private static IntPtr _pythonHome = IntPtr.Zero;
         private static IntPtr _programName = IntPtr.Zero;
         private static IntPtr _pythonPath = IntPtr.Zero;
+
+        public static event EventHandler<ImportEventArgs> OnModuleImporting;
+        public static event EventHandler<ImportEventArgs> OnModuleImported;
+
+        internal static void ModuleImporting(string name)
+        {
+
+            var e = new ImportEventArgs()
+            {
+                ModuleName = name
+            };
+
+            OnModuleImporting?.Invoke(null, e);
+        }
+
+        internal static void ModuleImported(string name)
+        {
+
+            var e = new ImportEventArgs()
+            {
+                ModuleName = name
+            };
+
+            OnModuleImported?.Invoke(null, e);
+        }
+
 
         public PythonEngine()
         {

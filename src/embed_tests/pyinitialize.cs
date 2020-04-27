@@ -62,6 +62,9 @@ namespace Python.EmbeddingTest
             PythonEngine.Shutdown();
 
             PythonEngine.Initialize();
+            PythonEngine.OnModuleImporting += (s, e) => { System.Diagnostics.Debug.Print(e.ModuleName); };
+            PythonEngine.OnModuleImported += (s, e) => { System.Diagnostics.Debug.Print(e.ModuleName); };
+
             using (Py.GIL())
             {
                 // Import a class/struct from .NET

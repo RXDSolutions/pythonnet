@@ -22,7 +22,7 @@ namespace Python.Runtime
     {
     }
 
-    internal class ClassDerivedObject : ClassObject
+    public class ClassDerivedObject : ClassObject
     {
         private static Dictionary<string, AssemblyBuilder> assemblyBuilders;
         private static Dictionary<Tuple<string, string>, ModuleBuilder> moduleBuilders;

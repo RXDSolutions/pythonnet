@@ -395,8 +395,28 @@ namespace Python.Runtime
                     tail.LoadNames();
                 }
 
+                try
+                {
+                    PythonEngine.ModuleImporting(realname);
+                }
+                catch (Exception ex)
+                {
+                    Exceptions.SetError(Exceptions.ImportError, ex.Message);
+                    return IntPtr.Zero;
+                }
+
                 // Add the module to sys.modules
                 Runtime.PyDict_SetItemString(modules, tail.moduleName, tail.pyHandle);
+
+                try
+                {
+                    PythonEngine.ModuleImported(realname);
+                }
+                catch (Exception ex)
+                {
+                    Exceptions.SetError(Exceptions.ImportError, ex.Message);
+                    return IntPtr.Zero;
+                }
 
                 // If imported from CLR add CLR.<modulename> to sys.modules as well
                 if (clr_prefix != null)
